@@ -78,19 +78,19 @@ fun makeTurn(game: GameState, player: Player): Boolean {
             )
 
             when {
-                (checkForWhiteEnPassant(5, -1, player, game, coordinates, game.lastMove[1] - game.lastMove[3])) -> {
+                (checkForEnPassant(5, -1, player, oppositePlayer, game, coordinates, game.lastMove[1] - game.lastMove[3])) -> {
                     makeEnPassantMove(game, coordinates, input, -1)
                     return true
                 }
-                (checkForWhiteEnPassant(5, 1, player, game, coordinates, game.lastMove[1] - game.lastMove[3])) -> {
+                (checkForEnPassant(5, 1, player, oppositePlayer, game, coordinates, game.lastMove[1] - game.lastMove[3])) -> {
                     makeEnPassantMove(game, coordinates, input, 1)
                     return true
                 }
-                (checkForBlackEnPassant(4, -1, player, game, coordinates, game.lastMove[3] - game.lastMove[1])) -> {
+                (checkForEnPassant(4, -1, player, oppositePlayer, game, coordinates, game.lastMove[3] - game.lastMove[1])) -> {
                     makeEnPassantMove(game, coordinates, input, -1)
                     return true
                 }
-                (checkForBlackEnPassant(4, 1, player, game, coordinates, game.lastMove[3] - game.lastMove[1])) -> {
+                (checkForEnPassant(4, 1, player, oppositePlayer, game, coordinates, game.lastMove[3] - game.lastMove[1])) -> {
                     makeEnPassantMove(game, coordinates, input, 1)
                     return true
                 }
@@ -217,22 +217,10 @@ fun checkWinCondition(game: GameState) {
     }
 }
 
-fun checkForWhiteEnPassant(rowForEnPassant: Int, direction: Int, player: Player, game: GameState, coordinates: Map<String, Int>, difBetweenCells: Int): Boolean {
-    return player == game.player1 &&
-            coordinates.getValue("startRow") == rowForEnPassant &&
+fun checkForEnPassant(rowForEnPassant: Int, direction: Int, player: Player, oppositePlayer: Player, game: GameState, coordinates: Map<String, Int>, difBetweenCells: Int): Boolean {
+    return  coordinates.getValue("startRow") == rowForEnPassant &&
             coordinates.getValue("startColumn") in 2..6 &&
-            game.board[game.board.size - coordinates.getValue("startRow")][coordinates.getValue("startColumn") + direction] == game.player2.color.first().uppercaseChar() &&
-            coordinates.getValue("finishColumn") == coordinates.getValue("startColumn") + direction &&
-            difBetweenCells == 2 &&
-            coordinates.getValue("finishColumn") == game.coordinates[game.lastMove[2]]!! + direction &&
-            coordinates.getValue("finishRow") == game.coordinates[game.lastMove[3]]!! + 1
-}
-
-fun checkForBlackEnPassant(rowForEnPassant: Int, direction: Int, player: Player, game: GameState, coordinates: Map<String, Int>, difBetweenCells: Int): Boolean {
-    return player == game.player2 &&
-            coordinates.getValue("startRow") == rowForEnPassant &&
-            coordinates.getValue("startColumn") in 2..6 &&
-            game.board[game.board.size - coordinates.getValue("startRow")][coordinates.getValue("startColumn") + direction] == game.player1.color.first().uppercaseChar() &&
+            game.board[game.board.size - coordinates.getValue("startRow")][coordinates.getValue("startColumn") + direction] == oppositePlayer.color.first().uppercaseChar() &&
             coordinates.getValue("finishColumn") == coordinates.getValue("startColumn") + direction &&
             difBetweenCells == 2 &&
             coordinates.getValue("finishColumn") == game.coordinates[game.lastMove[2]]!! + direction &&

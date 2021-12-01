@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="PawnsOnlyChessTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-01T17:18:11" hostname="Uladzislaus-MacBook-Pro.local" time="1.482">
+<testsuite name="PawnsOnlyChessTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-01T17:26:09" hostname="Uladzislaus-MacBook-Pro.local" time="1.458">
   <properties/>
-  <testcase name="start" classname="PawnsOnlyChessTest" time="1.482"/>
+  <testcase name="start" classname="PawnsOnlyChessTest" time="1.458"/>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
 Pawns-Only Chess
