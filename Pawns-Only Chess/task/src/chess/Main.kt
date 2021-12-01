@@ -78,19 +78,19 @@ fun makeTurn(game: GameState, player: Player): Boolean {
             )
 
             when {
-                (checkForEnPassant(5, -1, player, oppositePlayer, game, coordinates, game.lastMove[1] - game.lastMove[3])) -> {
+                (checkForEnPassant(5, -1, oppositePlayer, game, coordinates, game.lastMove[1] - game.lastMove[3])) -> {
                     makeEnPassantMove(game, coordinates, input, -1)
                     return true
                 }
-                (checkForEnPassant(5, 1, player, oppositePlayer, game, coordinates, game.lastMove[1] - game.lastMove[3])) -> {
+                (checkForEnPassant(5, 1, oppositePlayer, game, coordinates, game.lastMove[1] - game.lastMove[3])) -> {
                     makeEnPassantMove(game, coordinates, input, 1)
                     return true
                 }
-                (checkForEnPassant(4, -1, player, oppositePlayer, game, coordinates, game.lastMove[3] - game.lastMove[1])) -> {
+                (checkForEnPassant(4, -1, oppositePlayer, game, coordinates, game.lastMove[3] - game.lastMove[1])) -> {
                     makeEnPassantMove(game, coordinates, input, -1)
                     return true
                 }
-                (checkForEnPassant(4, 1, player, oppositePlayer, game, coordinates, game.lastMove[3] - game.lastMove[1])) -> {
+                (checkForEnPassant(4, 1, oppositePlayer, game, coordinates, game.lastMove[3] - game.lastMove[1])) -> {
                     makeEnPassantMove(game, coordinates, input, 1)
                     return true
                 }
@@ -217,7 +217,7 @@ fun checkWinCondition(game: GameState) {
     }
 }
 
-fun checkForEnPassant(rowForEnPassant: Int, direction: Int, player: Player, oppositePlayer: Player, game: GameState, coordinates: Map<String, Int>, difBetweenCells: Int): Boolean {
+fun checkForEnPassant(rowForEnPassant: Int, direction: Int, oppositePlayer: Player, game: GameState, coordinates: Map<String, Int>, difBetweenCells: Int): Boolean {
     return  coordinates.getValue("startRow") == rowForEnPassant &&
             coordinates.getValue("startColumn") in 2..6 &&
             game.board[game.board.size - coordinates.getValue("startRow")][coordinates.getValue("startColumn") + direction] == oppositePlayer.color.first().uppercaseChar() &&
